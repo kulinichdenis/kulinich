@@ -1,4 +1,4 @@
-//Work verstion 1.0
+//Work version 1.0
 
 'use strict';
 (function () {
@@ -37,7 +37,6 @@
             if(event.target.classList[1] === 'label-danger'){
                 this.removeChild(event.target.parentNode);
             }
-
         });
 
         addEvent(this.row, 'mouseleave', function(event){
@@ -62,16 +61,16 @@
         this.h2.className += 'stopwatch-current';
         this.spanHour = document.createElement('span');
         this.spanHour.id = 'hour';
-        this.spanHour.innerText = '00';
+        this.spanHour.textContent = '00';
         this.spanMin = document.createElement('span');
         this.spanMin.id = 'min';
-        this.spanMin.innerText = ':' + '00';
+        this.spanMin.textContent  = ':' + '00';
         this.spanSec = document.createElement('span');
         this.spanSec.id = 'sec';
-        this.spanSec.innerText = ':' + '00';
+        this.spanSec.textContent = ':' + '00';
         this.spanMilSec = document.createElement('span');
         this.spanMilSec.id = 'milSec';
-        this.spanMilSec.innerText = ':' + '00';
+        this.spanMilSec.textContent = ':' + '00';
 
         this.h2.appendChild(this.spanHour);
         this.h2.appendChild(this.spanMin);
@@ -89,15 +88,15 @@
 
         this.button = document.createElement('button');
         this.button.className += 'btn btn-primary';
-        this.button.innerText += 'Start';
+        this.button.textContent += 'Start';
         this.btn_group.appendChild(this.button);
         this.button = document.createElement('button');
         this.button.className += 'btn btn-info';
-        this.button.innerText += 'Lap';
+        this.button.textContent += 'Lap';
         this.btn_group.appendChild(this.button);
         this.button = document.createElement('button');
         this.button.className += 'btn btn-danger btn-sm';
-        this.button.innerText += 'Reset';
+        this.button.textContent += 'Reset';
         this.col_xs_4_stopwatch.appendChild(this.btn_group);
         this.col_xs_4_stopwatch.appendChild(this.button);
         this.row.appendChild(this.col_xs_4_stopwatch);
@@ -107,7 +106,7 @@
     }
 
     Timer.prototype.events = function(){
-            if (event.target.classList[1] === 'btn-primary' || event.keyCode === 83) {
+            if (arguments[0].target.classList[1] === 'btn-primary' || arguments[0].keyCode === 83) {
 //     start
                 if(this.timer){
                     clearTimeout(this.timer);
@@ -116,25 +115,25 @@
                 }
                 this.innerTimer();
             }
-            if (event.target.classList[1] === 'btn-info' || event.keyCode === 76) {
+            if (arguments[0].target.classList[1] === 'btn-info' || arguments[0].keyCode === 76) {
 //      lap
                 var divItem = document.createElement('div');
                 divItem.className += "alert alert-info";
-                divItem.innerHTML +=  this.spanHour.innerText + this.spanMin.innerText + this.spanSec.innerText + this.spanMilSec.innerText;
+                divItem.innerHTML +=  this.spanHour.textContent + this.spanMin.textContent + this.spanSec.textContent + this.spanMilSec.textContent;
                 divItem.innerHTML += '<span class="label label-danger">X</span>';
                 this.stopwatch.insertBefore(divItem, this.stopwatch.firstChild);
             }
-            if (event.target.classList[2] === 'btn-sm' || event.keyCode === 82) {
+            if (arguments[0].target.classList[2] === 'btn-sm' || arguments[0].keyCode === 82) {
 //      reset
                 this.milSec = 0;
                 this.second = 0;
                 this.minute = 0;
                 this.hours = 0;
 
-                this.spanHour.innerText =  '00';
-                this.spanMin.innerText = ':00';
-                this.spanSec.innerText = ':00';
-                this.spanMilSec.innerText = ':00';
+                this.spanHour.textContent =  '00';
+                this.spanMin.textContent = ':00';
+                this.spanSec.textContent = ':00';
+                this.spanMilSec.textContent = ':00';
 
                 if(this.timer){
                     clearTimeout(this.timer);
@@ -165,10 +164,10 @@ Timer.prototype.innerTimer = function() {
                 this.hours += 1;
             }
 
-            this.spanHour.innerText = this.hours > 10 ? this.hours : '0'+ this.hours;
-            this.spanMin.innerText =  this.minute > 10 ?  ':' + this.minute : ':0' + this.minute;
-            this.spanSec.innerText =  this.second > 10 ? ':' + this.second : ':0' + this.second;
-            this.spanMilSec.innerText = this.milSec === 0 ? ':00' : ':'+ this.milSec;
+            this.spanHour.textContent = this.hours > 10 ? this.hours : '0'+ this.hours;
+            this.spanMin.textContent =  this.minute > 10 ?  ':' + this.minute : ':0' + this.minute;
+            this.spanSec.textContent =  this.second > 10 ? ':' + this.second : ':0' + this.second;
+            this.spanMilSec.textContent = this.milSec === 0 ? ':00' : ':'+ this.milSec;
             this.timer = setTimeout(run.bind(this), 100);
         }
         this.timer = setTimeout( run.bind(this), 100)
